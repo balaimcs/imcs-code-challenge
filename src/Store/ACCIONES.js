@@ -18,6 +18,11 @@ import CONSTANTES from "./CONSTANTES";
         listaMaq
     });
 
+    export const actionDescribeFalloAutenticacion = mensaje => ({
+        type: CONSTANTES._DESCRIBE_FALLO_AUTENTICACION,
+        mensaje
+    });
+
     //LogIn
     export const actionAutenticaUsuario = usrInfo => ({
         type: CONSTANTES._AUTENTICA_USUARIO,    

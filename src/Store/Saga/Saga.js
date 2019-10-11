@@ -1,7 +1,7 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 import CONSTANTES from "../CONSTANTES";
 import { baseDeDatos, autenticacion } from "../Servicios/Firebase";
-import { actionEstableceListaMaq } from "../ACCIONES";
+import { actionEstableceListaMaq, actionDescribeFalloAutenticacion } from "../ACCIONES";
 
 //Deprecated-child
 const obtenListaMaquinasCall = () => {
@@ -30,16 +30,34 @@ function* obtenListaMaquinas(action){
 
 const logInUsuario = ({correo, password}) => autenticacion.signInWithEmailAndPassword(correo, password)
         .then(success=>success)
-        .catch(error=>{console.log('Sagas: logInUsuario: ',error); });
+        .catch(error=>error);
 
 function* autenticaUsuario(action){     
     //console.log('Saga: autenticaUsuario: ', action);    
-    let correo= action.usrInfo.correo;
+    let correo = action.usrInfo.correo;
     let password = action.usrInfo.password;
 
+    //yield call (logInUsuario, {correo, password});  
+
     //Solicita la autenticación de usuario y actualiza el servicio Firebase
-    //const userAuth = yield call (logInUsuario, {correo, password});      
-    yield call (logInUsuario, {correo, password});      
+    const userAuth = yield call (logInUsuario, {correo, password}); 
+    
+    //code: "auth/wrong-password"
+    //code: "auth/user-not-found"
+    //userAuth.message: Too many unsuccessful login attempts.  Please include reCaptcha verification or try again later
+    //userAuth.code?console.log('Saga: existe'):console.log('Saga: NOexiste');
+    if (userAuth.code) {        
+        if(userAuth.code==='auth/wrong-password'){
+            console.log('Saga: autenticaUsuario: if: auth/wrong-password ');
+            yield put(actionDescribeFalloAutenticacion(userAuth.code));
+        }else if(userAuth.code==='auth/user-not-found'){
+            console.log('Saga: autenticaUsuario: if: auth/user-not-found');
+            //yield put(actionDescribeFalloAutenticacion('Usuario no encontrado'));
+        }else{
+            console.log('Saga: autenticaUsuario: else: ', userAuth.message);
+            //yield put(actionDescribeFalloAutenticacion(userAuth.message));
+        }
+    }    
 }
 
 export function* funcionPrimaria(){    

@@ -29,11 +29,23 @@ const reducerEstableceListaMaq = (state=[], action=null) => {
     }
 }
 
+const reducerMensajeErrorAutenticacion = (state=[], action) => {
+    switch (action.type) {
+        case CONSTANTES._DESCRIBE_FALLO_AUTENTICACION:
+             console.log("Store: reducerMensajeErrorAutenticacion: _DESCRIBE_FALLO_AUTENTICACION", action);
+             { mensaje } action;          
+             return mensaje;
+             //return state; 
+        default:
+            return state;
+    }
+}
+
 const reducers = combineReducers({
     form,
     reducerSession,
     reducerEstableceListaMaq,
-    
+    reducerMensajeErrorAutenticacion,
 })
 
 const sagaMiddleware = createSagaMiddleware();
