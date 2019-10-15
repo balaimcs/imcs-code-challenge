@@ -16,7 +16,7 @@ class RevisarPermisos extends Component {
     render() {
         return (
             <div>
-                {this.props.usuario? <Panel /> : < LogIn/>}
+                {!this.props.usuario? < LogIn/>:<Panel />}
             </div>
         )
     }

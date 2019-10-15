@@ -4,9 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
-import {Card} from 'primereact/card';
 import {Message} from 'primereact/message';
-
 
     const validate = (values) => {
         const errors = {};
@@ -30,20 +28,19 @@ import {Message} from 'primereact/message';
         return errors;
     }
 
-    const header=(
-        <div>
-            <img src="assets/layout/images/profile.png" />
-        </div>
-    );
+    
 
     const fieldNombre = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
             <div>
                 <InputText name="correo" placeholder="Correo" 
-                    onChange={props.input.onChange} />
-                    <br/>
-                {props.meta.touched && props.meta.error && <Message severity="error" text={props.meta.error} /> }
+                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
+                    
+                <br/>    
+                {props.meta.touched && props.meta.error && 
+                <Message severity="warn" text={props.meta.error} 
+                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
             </div>
             
         );
@@ -54,40 +51,29 @@ import {Message} from 'primereact/message';
         return (
             <div>
                 <Password name="password" placeholder="Contraseña" 
-                    onChange={props.input.onChange} />
-                    <br/>
-                {props.meta.touched && props.meta.error && <Message severity="error" text={props.meta.error} /> }
+                    onChange={props.input.onChange} style={{maxWidth:320, width:320, marginTop:10 }}/>
+                
+                <br/>    
+                {props.meta.touched && props.meta.error && 
+                <Message severity="warn" text={props.meta.error} 
+                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                
             </div>            
         );
     }
 
     const LogInForm = (props) => {  
         return (
-            <div className="layout-profile" style={{maxWidth:450}}>
-                <Card className="p-card" header={header}
-                    title="Autenticar usuario" style={{justifyContent: 'center', }}
-                    subTitle="Favor de ingrese sus credenciales">                                                                  
-                        
-                        <Field name="correo" component={fieldNombre} ph="Correo" />
-                        <br/>
-                        <Field name="password" component={fieldPassword} ph="*****"/> 
-                        <br/>
-                        <div>
-                            <Button label="Autenticar" icon="pi pi-fw pi-power-off" 
-                                className="p-button-secondary p-button-rounded"
-                                onClick={props.handleSubmit(
-                                        props.datosUsuarioDispatch
-                                )} 
-                            />                       
-                        </div>
-                        {/* <div className="layout-profile-expanded">
-                            <button className="p-link" 
-                                onClick={ props.handleSubmit(props.datosUsuarioDispatch) }>
-                                <i className="pi pi-fw pi-power-off"/><span>LogIn</span>
-                            </button>
-                        </div> */}
-                        
-                </Card>
+            <div>       
+                <Field name="correo" component={fieldNombre} ph="Correo"/>                
+                <Field name="password" component={fieldPassword} ph="*****"/> 
+                
+                <Button label="Autenticar" icon="pi pi-fw pi-power-off" 
+                    className="p-button-secondary p-button-rounded"
+                    onClick={props.handleSubmit(                            
+                        props.datosUsuarioDispatch
+                    )} style={{maxWidth:320, width:300, marginTop:15 }}
+                />                                         
+                
             </div>
         );
 }

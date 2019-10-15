@@ -1,28 +1,58 @@
 import React, { Component } from 'react'
 import LogInForm from "./LogInForm";
-import {Messages} from 'primereact/messages';
+
+import {Message} from 'primereact/message';
+import {Card} from 'primereact/card';
+import {Button} from 'primereact/button';
 
 import { connect } from 'react-redux';
 import { actionAutenticaUsuario } from "../../Store/ACCIONES";
 
-class LogIn extends Component {  
+class LogIn extends Component { 
+  
+    constructor() {
+      super();
+      this.state = {
+          //isAuth:false
+      };      
+  }
+
+    componentWillMount() {            
+    }      
 
     inyectaDispatchusuario = (values) =>{
-        this.props.autenticaUsuarioDispatch(values);
+      this.props.autenticaUsuarioDispatch(values);
     }
 
+
     render() {
+      const header=(
+        <div>
+            <img src="assets/layout/images/profile.png" />
+        </div>
+      );
+     
         return (
-            <div>
-                {this.props.mensaje.length>0?<p>todo bien</p>:this.props.mensaje }
-                <LogInForm datosUsuarioDispatch={this.inyectaDispatchusuario} />                                
-            </div>            
+          
+            <div className="layout-profile"> 
+              
+              <Card className="p-card" header={header}                
+                      title="Autenticar usuario" style={{justifyContent: 'center', }}
+                      subTitle="Porfavor ingrese sus credenciales">                                                                                                
+                      
+                <LogInForm datosUsuarioDispatch={this.inyectaDispatchusuario}/>                                
+              </Card>  
+              
+              {this.props.mensaje?<div className='p-messages p-messages-error'>{this.props.mensaje}</div>:''}
+            </div>  
+            
         )
     }
 }
 
   const mapStateToProps = (state) => ({        
-    mensaje:state.reducerMensajeErrorAutenticacion
+    mensaje:state.reducerMensajeErrorAutenticacion,
+    //usuario:state.reducerSession
   });
   
   const mapDispatchToProps = (dispatch) =>({
@@ -33,5 +63,3 @@ class LogIn extends Component {
   
   //export default LogIn {
   export default connect(mapStateToProps,mapDispatchToProps)(LogIn);
-
-

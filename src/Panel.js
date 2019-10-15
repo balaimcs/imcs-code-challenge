@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {AppTopbar} from './AppTopbar';
 import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
-import {AppProfile} from './AppProfile';
+import AppProfile from './AppProfile';
 import {Route} from 'react-router-dom';
 import {Dashboard} from './components/Dashboard';
 import {FormsDemo} from './components/FormsDemo';
