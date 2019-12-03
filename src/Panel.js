@@ -27,6 +27,9 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 
+import {Sidebar} from 'primereact/sidebar';
+
+
 class Panel extends Component {
 
     constructor() {
@@ -244,6 +247,14 @@ class Panel extends Component {
                     {/* <Route path="/misc" component={MiscDemo} /> */}
                     {/* <Route path="/documentation" component={Documentation} /> */}
                 </div>
+
+                <div className='p-sidebar-right p-sidebar-active' onClick={this.onSidebarClick}>
+                    
+                </div>
+
+                <Sidebar visible='true' position="right" >
+                    <AppProfile />
+                </Sidebar>
 
                 <AppFooter />
 
