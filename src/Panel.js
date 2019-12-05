@@ -4,6 +4,7 @@ import {AppTopbar} from './AppTopbar';
 import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import AppProfile from './AppProfile';
+import Chat from './Chat';
 import {Route} from 'react-router-dom';
 import {Dashboard} from './components/Dashboard';
 import {FormsDemo} from './components/FormsDemo';
@@ -27,9 +28,6 @@ import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
 
-import {Sidebar} from 'primereact/sidebar';
-
-
 class Panel extends Component {
 
     constructor() {
@@ -39,11 +37,13 @@ class Panel extends Component {
             layoutColorMode: 'dark',
             staticMenuInactive: false,
             overlayMenuActive: false,
+            chatBarActive: false,
             mobileMenuActive: false
         };
 
         this.onWrapperClick = this.onWrapperClick.bind(this);
         this.onToggleMenu = this.onToggleMenu.bind(this);
+        this.onChatMenu = this.onChatMenu.bind(this);
         this.onSidebarClick = this.onSidebarClick.bind(this);
         this.onMenuItemClick = this.onMenuItemClick.bind(this);
         this.createMenu();
@@ -53,7 +53,8 @@ class Panel extends Component {
         if (!this.menuClick) {
             this.setState({
                 overlayMenuActive: false,
-                mobileMenuActive: false
+                //mobileMenuActive: false,
+                //chatBarActive: false
             });
         }
 
@@ -84,6 +85,15 @@ class Panel extends Component {
        
         event.preventDefault();
     }
+    
+    onChatMenu(event) {
+        this.menuClick = true;
+        this.setState({
+            chatBarActive: !this.state.chatBarActive
+        });
+       
+        event.preventDefault();
+    }
 
     onSidebarClick(event) {
         this.menuClick = true;
@@ -93,7 +103,8 @@ class Panel extends Component {
         if(!event.item.items) {
             this.setState({
                 overlayMenuActive: false,
-                mobileMenuActive: false
+                mobileMenuActive: false,
+                chatBarActive: false
             })
         }
     }
@@ -221,19 +232,39 @@ class Panel extends Component {
             'layout-sidebar-light': this.state.layoutColorMode === 'light'
         });
 
+        const mainClassName = classNames("layout-main", {
+            'chat': this.state.chatBarActive,
+        });
+
+        const topBarClassName = classNames("clearfix", {
+            'layout-topbar': !this.state.chatBarActive,
+            'topbar-chat': this.state.chatBarActive,
+        });
+
+        const chatBarClassName = classNames("layout-sidebar-chat", {
+            'on': this.state.chatBarActive,
+        });
+
         return (
             <div className={wrapperClass} onClick={this.onWrapperClick}>
-                <AppTopbar onToggleMenu={this.onToggleMenu}/>
+                <AppTopbar topBarClassName={topBarClassName} onToggleMenu={this.onToggleMenu} onChatMenu={this.onChatMenu}/>
 
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
                     <div className="layout-logo">
                         <img alt="Logo" src={logo} />
                     </div>
-                    <AppProfile />
+                    {/* <AppProfile /> */}
+                    
                     <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
                 </div>
 
-                <div className="layout-main">
+                <div className={chatBarClassName}>
+                    <Chat />
+                </div>
+
+                
+
+                <div className={mainClassName}>                    
                     <Route path="/" exact component={Dashboard} />                    
                     <Route path="/empty" component={EmptyPage} />
                     {/* <Route path="/forms" component={FormsDemo} /> */}
@@ -247,17 +278,7 @@ class Panel extends Component {
                     {/* <Route path="/misc" component={MiscDemo} /> */}
                     {/* <Route path="/documentation" component={Documentation} /> */}
                 </div>
-
-                <div className='p-sidebar-right p-sidebar-active' onClick={this.onSidebarClick}>
-                    
-                </div>
-
-                <Sidebar visible='true' position="right" >
-                    <AppProfile />
-                </Sidebar>
-
-                <AppFooter />
-
+                
                 <div className="layout-mask"></div>
             </div>
         );

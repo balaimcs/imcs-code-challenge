@@ -5,7 +5,7 @@ export class AppTopbar extends Component {
     constructor() {
         super();
         this.state = {
-            visibleRight: false,
+            
         };
     }
 
@@ -19,14 +19,14 @@ export class AppTopbar extends Component {
 
     render() {
         return (
-            <div className="layout-topbar clearfix">
+            <div className={this.props.topBarClassName}>
                 <button className="p-link layout-menu-button" onClick={this.props.onToggleMenu}>
                     <span className="pi pi-bars"/>
                 </button>
                 
                 <div className="layout-topbar-icons"> 
 
-                    <button className="p-link" onClick={(e) => this.setState({visibleRight:true})}>
+                    <button className="p-link" onClick={this.props.onChatMenu}>
                         <span className="layout-topbar-item-text">Events</span>
                         <span className="layout-topbar-icon pi pi-user"/>
                         <span className="layout-topbar-badge">5</span>
