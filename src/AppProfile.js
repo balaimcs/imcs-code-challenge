@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 //import { autenticacion } from "./Store/Servicios/Firebase";
-import { actionLogOutUsuario } from "./Store/ACCIONES";
+//import { actionLogOutUsuario } from "./Store/ACCIONES";
 
 import { connect } from 'react-redux';
 
@@ -55,9 +55,9 @@ class AppProfile extends Component {
   });
   
   const mapDispatchToProps = (dispatch) =>({
-    logOutDispatch:() =>{    
-        dispatch(actionLogOutUsuario());
-      },
+    // logOutDispatch:() =>{    
+    //     dispatch(actionLogOutUsuario());
+    //   },
   });
   
   //export default LogIn {

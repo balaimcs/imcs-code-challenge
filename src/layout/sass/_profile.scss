@@ -135,7 +135,7 @@
 
 .chat-messengers {
     text-align: center;
-    padding: 0px 0;
+    //padding: 0px 4px 0px 4px;
     img {
         //width: 56px;
         //margin: 5px;
@@ -143,13 +143,35 @@
 
     .div-buttons {
         //display: contents;
+        padding: 0px 0px 0px 0px;
         position: relative;
-        top:-15px;
+        left: 3px;
+        top:-12px;
+    }
+
+    .div-button-left {
+        //display: contents;
+        padding: 0px 0px 0px 0px;
+        position: relative;
+        left: 0px;
+        top: 0px;
+    }
+
+    .div-button-right {
+        //display: contents;
+        padding: 0px 0px 0px 0px;
+        position: relative;
+        left: 0px;
+        top: 0px;
     }
 
     .layout-profile-link-online {
         cursor: pointer;
         display: contents;
+        padding: 0px 0px 0px 0px;
+        position: relative;
+        left: 3px;
+        top:-12px;
         @include transition(color $transitionDuration);
         i {
             //display: inline-block;

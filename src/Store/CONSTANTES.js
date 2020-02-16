@@ -1,18 +1,10 @@
 const _CONSTANTES = { 
-    //Store    
-    _ESTABLECE_LISTA_MAQ:"ESTABLECE_LISTA_MAQ",
-    _LOG_OUT_USUARIO:'LOG_OUT_USUARIO',
-    _ESTABLECE_USUARIO:'ESTABLECE_USUARIO',
-    _DESCRIBE_FALLO_AUTENTICACION:'DESCRIBE_FALLO_AUTENTICACION',
     
-    //Saga    
-    _OBTEN_MAQUINAS:'OBTEN_MAQUINAS',
-    
-    //LogIn    
-    _AUTENTICA_USUARIO:'AUTENTICA_USUARIO',        
+    //DocumentUpload
+    _ADD_NEW_EVENT:'ADD_NEW_EVENT',
 
-    //Servicios
-    //_GOOGLE_MAPS_URI:'https://www.google.com.mx/maps/search/',
+    //GuestSubmit
+    _GUEST_DATA_INFO:'GUEST_DATA_INFO',
 
 };
 

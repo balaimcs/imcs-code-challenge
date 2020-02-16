@@ -29,7 +29,7 @@ export class AppTopbar extends Component {
                     <button className="p-link" onClick={this.props.onChatMenu}>
                         <span className="layout-topbar-item-text">Events</span>
                         <span className="layout-topbar-icon pi pi-user"/>
-                        <span className="layout-topbar-badge">5</span>
+                        {/* <span className="layout-topbar-badge">5</span> */}
                     </button> 
                                                       
                 </div>

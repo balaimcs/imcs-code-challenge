@@ -2,42 +2,25 @@ import CONSTANTES from "./CONSTANTES";
 
     // export const actionEstablecerUsuario = usuario => ({
     //     type: CONSTANTES._ESTABLECE_USUARIO_SESSION,
-    //     usuario
+    //     usrInfo:usuario
     // });
 
+    // export const actionLogOutUsuario = () => ({
+    //     type: CONSTANTES._LOG_OUT_USUARIO,    
+    // });
+
+    export const addEventAction = event => ({
+        type: CONSTANTES._ADD_NEW_EVENT,
+        event
+    });
+
+    export const guestDataAction = agreements => ({
+        type: CONSTANTES._GUEST_DATA_INFO,
+        agreements
+    });
     
-    //PanelSolicitudes
-    export const actionObtenListaMaquinaria = () => ({
-        type: CONSTANTES._OBTEN_MAQUINAS,        
-    });
 
-    //Saga
-    export const actionEstableceListaMaq = listaMaq => ({
-        type: CONSTANTES._ESTABLECE_LISTA_MAQ,
-        //datos:listaMaq
-        listaMaq
-    });
-
-    export const actionDescribeFalloAutenticacion = mensaje => ({
-        type: CONSTANTES._DESCRIBE_FALLO_AUTENTICACION,
-        mensaje
-    });
-
-    //LogIn
-    export const actionAutenticaUsuario = usrInfo => ({
-        type: CONSTANTES._AUTENTICA_USUARIO,    
-        usrInfo:usrInfo
-    });
-
-    //Start
-    export const actionEstableceUsuario = usrInfo => ({
-        type: CONSTANTES._ESTABLECE_USUARIO,    
-        usrInfo:usrInfo
-    });
-
-    export const actionLogOutUsuario = () => ({
-        type: CONSTANTES._LOG_OUT_USUARIO,    
-    });
+    
     
 
 

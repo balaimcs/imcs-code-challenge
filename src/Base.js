@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-//import Panel from "./Panel";
 
-class RevisarPermisos extends Component {
+import {  } from "./Store/ACCIONES";
+
+import Panel from "./Panel";
+
+class Base extends Component {
 
     componentWillMount() {
     }
@@ -10,7 +13,7 @@ class RevisarPermisos extends Component {
     render() {
         return (
             <div>
-                
+                <Panel />
             </div>
         )
     }
@@ -24,4 +27,4 @@ const mapDispatchToProps = (dispatch) =>({
 
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(RevisarPermisos);
+export default connect(mapStateToProps,mapDispatchToProps)(Base);

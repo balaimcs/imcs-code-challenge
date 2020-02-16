@@ -1,23 +1,14 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
 import {AppTopbar} from './AppTopbar';
-import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
-import AppProfile from './AppProfile';
-import Chat from './Chat';
 import {Route} from 'react-router-dom';
-import {Dashboard} from './components/Dashboard';
-import {FormsDemo} from './components/FormsDemo';
-import {SampleDemo} from './components/SampleDemo';
-import {DataDemo} from './components/DataDemo';
-import {PanelsDemo} from './components/PanelsDemo';
-import {OverlaysDemo} from './components/OverlaysDemo';
-import {MenusDemo} from './components/MenusDemo';
-import {MessagesDemo} from './components/MessagesDemo';
-import {ChartsDemo} from './components/ChartsDemo';
-import {MiscDemo} from './components/MiscDemo';
-import {EmptyPage} from './components/EmptyPage';
-import {Documentation} from "./components/Documentation";
+
+import {AppFooter} from './AppFooter';
+import AppProfile from './AppProfile';
+
+import { FileUploadDemo } from "./FileUploadDemo";
+
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -27,6 +18,15 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import './layout/layout.scss';
 import './App.scss';
+
+import {Dashboard} from './components/Dashboard';
+import {EmptyPage} from './components/EmptyPage';
+import EventSubmit from './components/authenticated/EventSubmit';
+import GuestList from "./components/authenticated/GuestList";
+
+import EventSubscription from "./components/noAuthenticated/EventSubscription";
+import GuestSubmit from "./components/noAuthenticated/GuestSubmit";
+import Agreement from "./components/noAuthenticated/Agreement";
 
 class Panel extends Component {
 
@@ -108,86 +108,24 @@ class Panel extends Component {
             })
         }
     }
-
+    
+    ////////////////////////////////////////////MENU COMPONENTS /////////////////////////////////////
     createMenu() {
         this.menu = [
-            {label: 'Inicio', icon: 'pi pi-fw pi-home', command: () => {window.location = '#/'}},
+            // {label: 'Inicio', icon: 'pi pi-fw pi-home', command: () => {window.location = '#/'}},
+            //{label: 'Upload', icon: 'pi pi-fw pi-home', to: '/upload'},
+            // {label: 'Example', icon: 'pi pi-fw pi-home', to: '/empty'},
+            {label: 'Home', icon: 'pi pi-fw pi-home', to: '/'},
+            {label: 'Event Subscription', icon: 'pi pi-fw pi-home', to: '/event-subscription'},
             {
-                label: 'Paginas', icon: 'pi pi-fw pi-file',
+                label: 'Admin Pannel', icon: 'pi pi-fw pi-cog',
                 items: [
-                    {label: 'Maquinas', icon: 'pi pi-fw pi-circle-off', to: '/empty'}
+                    {label: 'New Event', icon: 'pi pi-fw pi-home', to: '/new-event'},
+                    {label: 'GuestList', icon: 'pi pi-fw pi-home', to: '/guest-list'},      
                 ]
-            },
-            {
-                label: 'Preferencias', icon: 'pi pi-fw pi-cog',
-                items: [
-                    {label: 'Menú estatico', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutMode: 'static'}) },
-                    {label: 'Menú desplegable', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutMode: 'overlay'}) },
-                    {label: 'Menú obscuro', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutColorMode: 'dark'}) },
-                    {label: 'Menú claro', icon: 'pi pi-fw pi-bars',  command: () => this.setState({layoutColorMode: 'light'}) }
-                ]
-            },            
-            // {
-            //     label: 'Components', icon: 'pi pi-fw pi-globe', badge: '9',
-            //     items: [
-			// 		{label: 'Sample Page', icon: 'pi pi-fw pi-th-large', to: '/sample'},
-			// 		{label: 'Forms', icon: 'pi pi-fw pi-file', to: '/forms'},
-			// 		{label: 'Data', icon: 'pi pi-fw pi-table', to: '/data'},
-			// 		{label: 'Panels', icon: 'pi pi-fw pi-list', to: '/panels'},
-			// 		{label: 'Overlays', icon: 'pi pi-fw pi-clone', to: '/overlays'},
-			// 		{label: 'Menus', icon: 'pi pi-fw pi-plus', to: '/menus'},
-			// 		{label: 'Messages', icon: 'pi pi-fw pi-spinner',to: '/messages'},
-			// 		{label: 'Charts', icon: 'pi pi-fw pi-chart-bar', to: '/charts'},
-			// 		{label: 'Misc', icon: 'pi pi-fw pi-upload', to: '/misc'}
-            //     ]
-            // },            
-            // {
-            //     label: 'Menu Hierarchy', icon: 'pi pi-fw pi-search',
-            //     items: [
-            //         {
-            //             label: 'Submenu 1', icon: 'pi pi-fw pi-bookmark',
-            //             items: [
-            //                 {
-            //                     label: 'Submenu 1.1', icon: 'pi pi-fw pi-bookmark',
-            //                     items: [
-            //                         {label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark'},
-            //                     ]
-            //                 },
-            //                 {
-            //                     label: 'Submenu 1.2', icon: 'pi pi-fw pi-bookmark',
-            //                     items: [
-            //                         {label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-bookmark'}
-            //                     ]
-            //                 },
-            //             ]
-            //         },
-            //         {
-            //             label: 'Submenu 2', icon: 'pi pi-fw pi-bookmark',
-            //             items: [
-            //                 {
-            //                     label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-            //                     items: [
-            //                         {label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-bookmark'},
-            //                     ]
-            //                 },
-            //                 {
-            //                     label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-            //                     items: [
-            //                         {label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark'},
-            //                         {label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-bookmark'}
-            //                     ]
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // },
-            //{label: 'Documentation', icon: 'pi pi-fw pi-question', command: () => {window.location = "#/documentation"}},
-            //{label: 'View Source', icon: 'pi pi-fw pi-search', command: () => {window.location = "https://github.com/primefaces/sigma"}}
+            }
+            
+            
         ];
     }
 
@@ -241,33 +179,28 @@ class Panel extends Component {
             'topbar-chat': this.state.chatBarActive,
         });
 
-        const chatBarClassName = classNames("layout-sidebar-chat", {
-            'on': this.state.chatBarActive,
-        });
-
         return (
             <div className={wrapperClass} onClick={this.onWrapperClick}>
-                <AppTopbar topBarClassName={topBarClassName} onToggleMenu={this.onToggleMenu} onChatMenu={this.onChatMenu}/>
+                <AppTopbar topBarClassName={topBarClassName} onToggleMenu={this.onToggleMenu}/>
 
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
-                    <div className="layout-logo">
+                    {/* <div className="layout-logo">
                         <img alt="Logo" src={logo} />
-                    </div>
-                    {/* <AppProfile /> */}
+                    </div> */}
                     
                     <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
                 </div>
 
-                <div className={chatBarClassName}>
-                    <Chat />
-                </div>
-
-                
-
                 <div className={mainClassName}>                    
                     <Route path="/" exact component={Dashboard} />                    
-                    <Route path="/empty" component={EmptyPage} />
-                    {/* <Route path="/forms" component={FormsDemo} /> */}
+                    <Route path="/new-event" component={EventSubmit} />
+                    <Route path="/upload" component={FileUploadDemo} />
+                    <Route path="/guest-list" component={GuestList} />
+                    
+                    <Route path="/event-subscription" component={EventSubscription} />
+                    <Route path="/guest-submit" component={GuestSubmit} />
+                    <Route path="/acept-agreement" component={Agreement} />
+
                     {/* <Route path="/sample" component={SampleDemo} /> */}
                     {/* <Route path="/data" component={DataDemo} /> */}
                     {/* <Route path="/panels" component={PanelsDemo} /> */}
