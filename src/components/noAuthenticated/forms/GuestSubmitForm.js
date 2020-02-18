@@ -123,7 +123,7 @@ import {Message} from 'primereact/message';
     }
 
     const GuestSubmitForm = (props) => { 
-        const nextLink='/acept-agreement?event='+props.eventId+'*';
+        const nextLink='#/acept-agreement?event='+props.eventId+'*';
         return (            
             <div className="card card-w-title"> 
                 <h1>Registration Form</h1> 
@@ -135,11 +135,11 @@ import {Message} from 'primereact/message';
                     <Field name="email" component={fieldEmail} ph=".edu Email id"/>
                         
             </div>  
-                {/* <Link to={nextLink} onClick={props.handleSubmit(props.dataGuest)}> */}
+                {/* <Link to={nextLink} onMouseUp={()=>{window.location = nextLink}}> */}
                     <Button onClick={props.handleSubmit(props.dataGuest)} 
-                        // onMouseOver={()=>{window.location = nextLink}}
+                        onMouseUp={()=>{window.location = nextLink}}
                         label="Submit" style={{ marginTop:15 }} />
-                {/* </Link>                                            */}
+                {/* </Link>                                             */}
             </div>   
         );
     }

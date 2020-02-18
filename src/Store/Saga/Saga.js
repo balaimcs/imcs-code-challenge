@@ -66,7 +66,7 @@ import { setUsr } from "../ACCIONES";
                     alert('Event added succesfully');
                     window.location = '#/';  
                 } else {
-                    console.log('Someting went wrong'+ response);
+                    console.log('Something went wrong'+ response);
                 }
               })
         } );    
@@ -82,7 +82,8 @@ import { setUsr } from "../ACCIONES";
               .then(function (response) {
                 if (response.status===201) {
                     //http://localhost:3000/#/acept-agreement?event=1*
-                    window.location = '/'                    
+                    //window.location = '/' 
+                    alert('Thanks for subscribe');                   
                 } else {
                     alert('Something went wrong');
                 }
