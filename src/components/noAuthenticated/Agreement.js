@@ -8,6 +8,8 @@ import {Panel} from 'primereact/panel';
 import {Checkbox} from 'primereact/checkbox';
 import {Accordion, AccordionTab} from 'primereact/accordion';
 
+import { Link } from 'react-router-dom';
+
 export class EmptyPage extends Component {
     constructor() {
         super();
@@ -48,6 +50,19 @@ export class EmptyPage extends Component {
         <span className="ql-formats">
         </span>
     );
+
+    serviceGuestSubmit = (agreement) =>{
+        axios.post('http://localhost:8080/user/guest', agreement)
+            .then(function (response) {
+            if (response.status===201) {
+                //http://localhost:3000/#/acept-agreement?event=1*
+                window.location = '#/acept-agreement?event=1*' 
+                alert('Thanks for subscribe');                   
+            } else {
+                alert('Something went wrong');
+            }
+        })
+    }
     
     //Obtain part of url eventId and user mail
     //http://localhost:3000/#/acept-agreement?event=1*lic.jorge@correo.edu
@@ -70,7 +85,7 @@ export class EmptyPage extends Component {
                     <Panel header="Disclaimer agree" >
                         <div className="activity-header">                            
                             <Accordion>
-                                <AccordionTab header="Disclaimer">
+                                {/* <AccordionTab header="Disclaimer">
                                     
                                     <Editor name="disclaimerEditor" style={{height:'320px'}} readOnly={true} headerTemplate={this.header}
                                         value={this.state.disclaimer}
@@ -80,7 +95,7 @@ export class EmptyPage extends Component {
                                         <Checkbox checked={this.state.disclaimerChecked} onChange={e => this.setState({disclaimerChecked: e.checked})} />
                                         <label htmlFor="cb1" className="p-checkbox-label">Agree</label>
                                     </div>
-                                </AccordionTab>
+                                </AccordionTab> */}
                                 <AccordionTab header="Terms and conditions">
                                         
                                     <Editor name="termsEditor" style={{height:'320px'}} readOnly={true} headerTemplate={this.header}
@@ -110,11 +125,21 @@ export class EmptyPage extends Component {
                 </div>
 
                 <div className="p-col-2">
-                    <Button type="button" label="Submit" icon="fa-send" 
+                    {/* <Button type="button" label="Otro" icon="fa-send" 
                         onClick={()=>{
                             //console.log(this.state.event.business);
                             window.location = '#/';
-                        }}/>
+                        }}/> */}
+                    
+                    {/* {http://localhost:3000/#/} */}
+                    
+                    <Link to='/'>                    
+                        <Button label="Submit" style={{ marginTop:15 }}  
+                            onClick={()=>{                        
+                                //this.serviceGuestSubmit(this.state.agreement);
+                            } }
+                        />    
+                    </Link>  
                 </div>
             </div>
         );

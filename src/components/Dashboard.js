@@ -15,7 +15,6 @@ export class Dashboard extends Component {
             checked2: false,
             checked3: false,
         };
-        
     }
 
     
@@ -29,9 +28,7 @@ export class Dashboard extends Component {
             <div className="p-grid p-fluid dashboard">
 
                 <div className="p-col-12 p-md-6 p-lg-4 contacts">
-                    <Panel header="Home">
-                        
-                    </Panel>
+                    
                 </div>
             </div>
         );

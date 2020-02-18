@@ -13,10 +13,8 @@ class Base extends Component {
         this.state = {
             eventId:0,
             event:{},
-        };
-        
+        };   
     }
-
 
     componentWillMount = () =>{
         let eventId=this.obtainUrlPart();
@@ -45,6 +43,7 @@ class Base extends Component {
                     <Panel header="Event photo" >
                         <img alt="Card" src='http://localhost:8080/downloadFile/avatar_1.png' width="150" height="200"/>
                         <div className="p-col-2">
+                            {/* http://localhost:3000/#/event-subscription?event=1*  */}
                             <Link to={nextLink}>
                                 <Button type="button" label="Register"/>
                             </Link>
