@@ -27,7 +27,7 @@ class GuestSubmit extends Component {
 
     componentWillMount() {
         let eventId=this.obtainUrlPart();
-        this.setState({event:eventId, eventList:[{eventsId:eventId}]});
+        this.setState({event:eventId, eventList:[{eventId:eventId}]});
 
         {/* {http://localhost:3000/#/acept-agreement?event=1*lic.jorge@correo.edu} */}
         //let linkUrl='/acept-agreement?event='+this.state.event+'*'+this.satate.email;

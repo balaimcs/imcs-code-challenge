@@ -6,6 +6,7 @@ import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import {Panel} from 'primereact/panel';
 
+import { Link } from 'react-router-dom';
 import {FileUpload} from 'primereact/fileupload';
 import {Accordion, AccordionTab} from 'primereact/accordion';
 import {Editor} from 'primereact/editor';
@@ -91,11 +92,15 @@ import {Editor} from 'primereact/editor';
         return (
             <Panel header="Agreement">
                 <div>
-                    <Field name="photoUrl" component={fieldPhoto} ph="First name"/>
+
+                <FileUpload name="demo[]"  multiple={true} 
+                        accept="image/*" maxFileSize={10000000} 
+                        url="http://localhost:8080/uploadFile" />
+
                     <Accordion>
-                        <AccordionTab header="Disclaimer">
+                        {/* <AccordionTab header="Disclaimer">
                             <Field name="disclaimer" component={fieldDisclaimer} />
-                        </AccordionTab>
+                        </AccordionTab> */}
                         
                         <AccordionTab header="Terms and conditions">
                             <Field name="termsAndConditions" component={fieldTermsAndConditions} />
@@ -105,10 +110,18 @@ import {Editor} from 'primereact/editor';
                             <Field name="business" component={fieldBusinessCase}/>
                         </AccordionTab>
                     </Accordion>
+                    
                     <Button label="Submit" onMouseUp={()=>{window.location = '#/';}}
                         onClick={ props.handleSubmit(props.dataEvent)} 
-                        style={{maxWidth:320, width:300, marginTop:15 }}
+                        style={{maxWidth:120, width:100, marginTop:15 }}
                     /> 
+
+                    <Link to={'/'} style={{marginLeft:12}} >
+                        <Button label="Delete" onClick={ ()=>{ } } 
+                            style={{maxWidth:120, width:100, marginTop:15 }}
+                        /> 
+                    </Link>
+                    
                 </div>                
             </Panel>
         );

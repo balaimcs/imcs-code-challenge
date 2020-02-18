@@ -11,18 +11,18 @@ import {Message} from 'primereact/message';
 
         //Validaciones para correo
         if (!values.mail){
-            errors.mail='Este campor es requerido'
+            errors.mail='Required'
         }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail)){
-            errors.mail='Correo invalido'
+            errors.mail='Wrong mail'
         }
 
         //Validaciones para password
         if (!values.password){
             errors.password = 'Requerido'
         }else if (values.password.length < 5 ){
-            errors.password='Debe ser al menos 5 caracteres'
-        }else if (values.password.length > 10 ){
-            errors.password='Debe ser menos de 10 caracteres'
+            errors.password='At least 5 characters'
+        }else if (values.password.length > 15 ){
+            errors.password='Max 15 characters'
         }
 
         return errors;

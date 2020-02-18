@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'primereact/button';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class AppTopbar extends Component {
     constructor() {
@@ -45,10 +46,12 @@ export class AppTopbar extends Component {
                 
                 <div className="layout-topbar-icons">  
                     
-                    {this.props.menuButton &&<button className="p-link" onClick={()=>{ window.location = '#/'; }}>
-                        <span className="layout-topbar-icon pi pi-home"/>
-                        {/* <span className="layout-topbar-badge">5</span> */}
-                    </button> }
+                    {this.props.menuButton && <Link to={'/'} style={{marginLeft:12}} >
+                        <button className="p-link">
+                            <span className="layout-topbar-icon pi pi-home"/>
+                        </button>
+                    </Link>
+                     }
 
                     {!this.props.menuButton && <button className="p-link" onClick={()=>{this.authUser(this.props.pannel); }}>
                         <span className="layout-topbar-icon pi pi-user"/>
