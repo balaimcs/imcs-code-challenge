@@ -10,10 +10,10 @@ import {Message} from 'primereact/message';
         const errors = {};
 
         //Validaciones para correo
-        if (!values.correo){
-            errors.correo='Este campor es requerido'
-        }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.correo)){
-            errors.correo='Correo invalido'
+        if (!values.mail){
+            errors.mail='Este campor es requerido'
+        }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail)){
+            errors.mail='Correo invalido'
         }
 
         //Validaciones para password
@@ -30,11 +30,11 @@ import {Message} from 'primereact/message';
 
     
 
-    const fieldNombre = (props) => {
+    const mailField = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
             <div>
-                <InputText name="correo" placeholder="Correo" 
+                <InputText name="mail" placeholder="Mail" 
                     onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
                     
                 <br/>    
@@ -46,11 +46,11 @@ import {Message} from 'primereact/message';
         );
     }
 
-    const fieldPassword = (props) => {
+    const passwordField = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
             <div>
-                <Password name="password" placeholder="Contraseña" 
+                <Password name="password" placeholder="Password" 
                     onChange={props.input.onChange} style={{maxWidth:320, width:320, marginTop:10 }}/>
                 
                 <br/>    
@@ -64,14 +64,15 @@ import {Message} from 'primereact/message';
     const LogInForm = (props) => {  
         return (
             <div>       
-                <Field name="correo" component={fieldNombre} ph="Correo"/>                
-                <Field name="password" component={fieldPassword} ph="*****"/> 
+                <Field name="mail" component={mailField} ph="Mail"/>                
+                <Field name="password" component={passwordField} ph="*****"/> 
                 
                 <Button label="Autenticar" icon="pi pi-fw pi-power-off" 
                     className="p-button-secondary p-button-rounded"
-                    onClick={props.handleSubmit(                            
-                        props.datosUsuarioDispatch
-                    )} style={{maxWidth:320, width:300, marginTop:15 }}
+                    onClick={
+                        props.handleSubmit( props.usrDinfo
+                    )} 
+                    style={{maxWidth:320, width:300, marginTop:15 }}
                 />                                         
                 
             </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import { Link } from 'react-router-dom';
 import {Button} from 'primereact/button';
 import {Panel} from 'primereact/panel';
 
@@ -35,20 +36,18 @@ class Base extends Component {
             //console.log(result);
             return result;
     }
-
+    
     render() {
+        const nextLink='/guest-submit?event='+this.state.eventId+'*';
         return (
             <div>
                 <div className="p-col-12 p-md-6 p-lg-6 contacts">
                     <Panel header="Event photo" >
                         <img alt="Card" src='http://localhost:8080/downloadFile/avatar_1.png' width="150" height="200"/>
                         <div className="p-col-2">
-                            <Button type="button" label="Register" icon="fa-send"  
-                                onClick={()=>{
-                                    //console.log(this.state.event);
-                                    window.location = '#/guest-submit?event='+this.state.eventId+'*'
-                                    }
-                                } />
+                            <Link to={nextLink}>
+                                <Button type="button" label="Register"/>
+                            </Link>
                         </div>                        
                     </Panel>
                 </div>

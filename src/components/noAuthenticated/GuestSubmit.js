@@ -34,10 +34,10 @@ class GuestSubmit extends Component {
     }
 
     render() {
-        return (            
-            <div className="p-col-12 p-lg-6 contacts">                    
-                <GuestSubmitForm dataGuest={this.injectGuestDispatch} />
-            </div>
+        return (
+            <div className="p-col-12 ">
+                <GuestSubmitForm dataGuest={this.injectGuestDispatch} eventId={this.state.event}/>
+            </div>  
         )
     }
 }

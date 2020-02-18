@@ -6,6 +6,13 @@ const _CONSTANTES = {
     //GuestSubmit
     _GUEST_DATA_INFO:'GUEST_DATA_INFO',
 
+    //Login
+    _USER_AUTH:'USER_AUTH',
+
+    //Store
+    _SET_USER:'_SET_USER',
+
+
 };
 
 export default _CONSTANTES;

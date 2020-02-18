@@ -27,10 +27,10 @@ class GuestList extends Component {
         return (
             <div>
                 <DataTable value={this.state.guestList}>
-                    <Column field="firstName" header="Vin" />
-                    <Column field="lastName" header="Year" />
-                    <Column field="phoneNumber" header="Brand" />
-                    <Column field="email" header="Color" />
+                    <Column field="firstName" header="First name" />
+                    <Column field="lastName" header="Last name" />
+                    <Column field="email" header="Mail" />
+                    <Column field="phoneNumber" header="Phone number" />
                 </DataTable>
             </div>
         )
@@ -38,11 +38,9 @@ class GuestList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-     
 });
 
 const mapDispatchToProps = (dispatch) =>({
-
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(GuestList);

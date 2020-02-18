@@ -102,11 +102,11 @@ import {Editor} from 'primereact/editor';
                         </AccordionTab>
                         
                         <AccordionTab header="Business case">
-                            <Field name="business" component={fieldBusinessCase} value='Hola coomo'/>
+                            <Field name="business" component={fieldBusinessCase}/>
                         </AccordionTab>
                     </Accordion>
-                    <Button label="Submit"
-                        onClick={props.handleSubmit(props.dataEvent)} 
+                    <Button label="Submit" onMouseUp={()=>{window.location = '#/';}}
+                        onClick={ props.handleSubmit(props.dataEvent)} 
                         style={{maxWidth:320, width:300, marginTop:15 }}
                     /> 
                 </div>                

@@ -4,28 +4,26 @@ import {reducer as form} from 'redux-form';
 import {funcionPrimaria} from "./Saga/Saga";
 import CONSTANTES from "./CONSTANTES";
 
-// import { autenticacion } from "./Servicios/Firebase";
-
-// const reducerSession = (state=[], action) => {
-//     switch (action.type) {
-//         case CONSTANTES._ESTABLECE_USUARIO:            
-//             const {usrInfo:{uid}, usrInfo:{email}}= action;
-//             return {email,uid};                
-        
-//         case CONSTANTES._LOG_OUT_USUARIO:
-//             //console.log("Store: reducerSession: _LOG_OUT_USUARIO", state);               
-//             //autenticacion.signOut();                        
-//             return null;            
-       
-//         default:
-//             return state;
-//     }
-// }
+const reducerSession = (state=[], action) => {
+    switch (action.type) {
+        case CONSTANTES._SET_USER:
+            //console.log("Store: reducerSession: _SET_USER");          
+            let email='jorge';
+            let uid=true;
+            return {email,uid};
+        // case CONSTANTES._LOG_OUT_USUARIO:
+        //     console.log("Store: reducerSession: _LOG_OUT_USUARIO", state);               
+        //     //autenticacion.signOut();                        
+        //     return null;            
+        default:
+            return state;
+    }
+}
 
 
 const reducers = combineReducers({
     form,
-    //reducerSession
+    reducerSession
 })
 
 const sagaMiddleware = createSagaMiddleware();

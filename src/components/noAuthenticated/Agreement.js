@@ -13,37 +13,39 @@ export class EmptyPage extends Component {
         super();
         this.state = {
             eventId:0,
-            event:{},
-            usuario:'',
+            eventObj:{},
+            mail:'',
+            
             disclaimer:'',
             termsAndConditions:'',
-            business:''
+            business:'',
+            
+            disclaimerChecked: false,
+            termsAndConditionsChecked: false,
+            businessChecked: false,
         };
         
     }
 
     componentDidMount() {
         let eventMail=this.obtainUrlPart();
-        let event = axios.get(
+        let eventFromAxios = axios.get(
             'http://localhost:8080/events/getEvent/'+eventMail.event)
-        .then(res => res.data); 
+        .then(res => res.data)
+        .then(data => {
+            this.setState({ disclaimer: data.disclaimer, termsAndConditions:data.termsAndConditions, business:data.business });
+            return data;
+        });
 
-            console.log(event);
-        const{disclaimer,termsAndConditions,business}=event;
         this.setState({
             eventId:eventMail.event,
-            event:event, 
-            usuario:eventMail.mail,
-            
-            disclaimerChecked: false,
-            termsAndConditionsChecked: false,
-            businessChecked: false,
-        });
-    }
+            eventObj:eventFromAxios, 
+            mail:eventMail.mail           
+        });}
+
     
     header = (
         <span className="ql-formats">
-            
         </span>
     );
     
@@ -69,27 +71,37 @@ export class EmptyPage extends Component {
                         <div className="activity-header">                            
                             <Accordion>
                                 <AccordionTab header="Disclaimer">
-                                    The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+                                    
+                                    <Editor name="disclaimerEditor" style={{height:'320px'}} readOnly={true} headerTemplate={this.header}
+                                        value={this.state.disclaimer}
+                                    />
+
                                     <div className="p-col-12">
                                         <Checkbox checked={this.state.disclaimerChecked} onChange={e => this.setState({disclaimerChecked: e.checked})} />
-                                        <label htmlFor="cb1" className="p-checkbox-label">Ultima</label>
+                                        <label htmlFor="cb1" className="p-checkbox-label">Agree</label>
                                     </div>
                                 </AccordionTab>
                                 <AccordionTab header="Terms and conditions">
-                                    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy.
+                                        
+                                    <Editor name="termsEditor" style={{height:'320px'}} readOnly={true} headerTemplate={this.header}
+                                    value={this.state.termsAndConditions}/>
+
                                     <div className="p-col-12">
                                         <Checkbox checked={this.state.termsAndConditionsChecked} onChange={e => this.setState({termsAndConditionsChecked: e.checked})} />
-                                        <label htmlFor="cb1" className="p-checkbox-label">Ultima</label>
+                                        <label htmlFor="cb2" className="p-checkbox-label">Agree</label>
                                     </div>
                                 </AccordionTab>
                                 
                                 <AccordionTab header="Business Case">
-                                <Editor style={{height:'320px'}} readOnly={true} headerTemplate={this.header}
-                                    value={this.state.event.business}
-                                />
+                                    <Editor name="businessEditor" style={{height:'320px'}} 
+                                        onTextChange={(e) => this.setState({business: e.htmlValue})}
+                                        readOnly={true} headerTemplate={this.header}
+                                        value={this.state.business}
+                                    />
                                 
                                     <div className="p-col-12">
                                         <Checkbox checked={this.state.businessChecked} onChange={e => this.setState({businessChecked: e.checked})} />
+                                        <label htmlFor="cb3" className="p-checkbox-label">Agree</label>
                                     </div>
                                 </AccordionTab>
                             </Accordion>
@@ -100,8 +112,8 @@ export class EmptyPage extends Component {
                 <div className="p-col-2">
                     <Button type="button" label="Submit" icon="fa-send" 
                         onClick={()=>{
-                            console.log(this.state.event.business);
-                            //window.location = '#/'
+                            //console.log(this.state.event.business);
+                            window.location = '#/';
                         }}/>
                 </div>
             </div>

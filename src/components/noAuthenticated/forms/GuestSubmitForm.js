@@ -1,25 +1,36 @@
 import React from 'react';
 import { Field, reduxForm } from "redux-form";
+import { Link } from 'react-router-dom';
 
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
-import {Password} from 'primereact/password';
 import {Message} from 'primereact/message';
-import {Panel} from 'primereact/panel';
 
     const validate = (values) => {
         const errors = {};
 
         //Validaciones para correo
         if (!values.email){
-            errors.email='Este campor es requerido'
+            errors.email='Required'
         }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
             errors.email='Mail invalid format'
         }else if(!values.email.endsWith('.edu')){
             errors.email='Mail invalid domain must ends with .edu'
         }
 
-        //Validaciones para password
+        if (!values.firstName){
+            errors.firstName = 'Required'
+        }
+
+        if (!values.lastName){
+            errors.lastName = 'Required'
+        }
+
+        if (!values.phone){
+            errors.phone = 'Required'
+        }
+
+        //password validaciones 
         if (!values.password){
             errors.password = 'Requerido'
         }else if (values.password.length < 5 ){
@@ -35,14 +46,14 @@ import {Panel} from 'primereact/panel';
     const fieldFirstName = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
-            <div>
-                <InputText name="firstName" placeholder="First name" 
-                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
-                    
-                <br/>    
+            <div className="p-col-12 p-md-3">
+                <div>
+                    <label htmlFor="firstName">First name *</label>
+                </div>
+                <InputText name="firstName" id="firstName" placeholder="First name" 
+                    onChange={props.input.onChange} />      
                 {props.meta.touched && props.meta.error && 
-                <Message severity="warn" text={props.meta.error} 
-                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
+                <Message severity="warn" ></Message>}                              
             </div>
             
         );
@@ -51,14 +62,12 @@ import {Panel} from 'primereact/panel';
     const fieldMiddleName = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
-            <div>
+            <div className="p-col-12 p-md-3">
+                <div>
+                    <label htmlFor="firstName">Middle name</label>
+                </div>
                 <InputText name= "middleName" placeholder="Middle name" 
-                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
-                    
-                <br/>    
-                {props.meta.touched && props.meta.error && 
-                <Message severity="warn" text={props.meta.error} 
-                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
+                    onChange={props.input.onChange} />                              
             </div>
             
         );
@@ -67,14 +76,14 @@ import {Panel} from 'primereact/panel';
     const fieldLastName = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
-            <div>
+            <div className="p-col-12 p-md-3">
+                <div>
+                    <label htmlFor="firstName">Last name*</label>
+                </div>
                 <InputText name="lastName" placeholder="Last name" 
-                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
-                    
-                <br/>    
+                    onChange={props.input.onChange} />
                 {props.meta.touched && props.meta.error && 
-                <Message severity="warn" text={props.meta.error} 
-                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
+                <Message severity="warn"></Message>}                              
             </div>
             
         );
@@ -83,14 +92,14 @@ import {Panel} from 'primereact/panel';
     const fieldPhone = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
-            <div>
-                <InputText name="phone" placeholder="Phone" 
-                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
-                    
-                <br/>    
+            <div className="p-col-12 p-md-3">
+                <div>
+                    <label htmlFor="firstName">Phone*</label>
+                </div>
+                <InputText name="phoneNumber" placeholder="(123) 456 7890" 
+                    onChange={props.input.onChange} />
                 {props.meta.touched && props.meta.error && 
-                <Message severity="warn" text={props.meta.error} 
-                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
+                <Message severity="warn"></Message>}                              
             </div>
             
         );
@@ -99,37 +108,40 @@ import {Panel} from 'primereact/panel';
     const fieldEmail = (props) => {
         //console.log('LogInForm: fieldNombre: props', props);
         return (
-            <div>
+            <div className="p-col-12 p-md-6">
+                <div>
+                    <label htmlFor="firstName">Mail*</label>
+                </div>
                 <InputText name="email" placeholder="Mail" 
-                    onChange={props.input.onChange} style={{maxWidth:320, width:320, }}/>
-                    
-                <br/>    
+                    onChange={props.input.onChange} />
+                 
                 {props.meta.touched && props.meta.error && 
-                <Message severity="warn" text={props.meta.error} 
-                    style={{maxWidth:320, width:320, marginTop:5 }}></Message>}                              
+                <Message severity="warn"></Message>}                              
             </div>
             
         );
     }
 
     const GuestSubmitForm = (props) => { 
-        return (
-            <Panel header="Contact Us">
-                <div>       
+        const nextLink='/acept-agreement?event='+props.eventId+'*';
+        return (            
+            <div className="card card-w-title"> 
+                <h1>Registration Form</h1> 
+                <div className="p-grid">
                     <Field name="firstName" component={fieldFirstName} ph="First name"/>
                     <Field name="middleName" component={fieldMiddleName} ph="Middle name"/>
                     <Field name="lastName" component={fieldLastName} ph="Last Name"/>
-                    <Field name="phone" component={fieldPhone} ph="Phone "/>
+                    <Field name="phoneNumber" component={fieldPhone} ph="Phone "/>
                     <Field name="email" component={fieldEmail} ph=".edu Email id"/>
- 
-                    <Button label="Submit"  onClick={props.handleSubmit(props.dataGuest)} 
-                        style={{maxWidth:320, width:300, marginTop:15 }}
-                    />                                         
-                
-                </div>
-            </Panel>
-            
+                        
+            </div>  
+                {/* <Link to={nextLink} onClick={props.handleSubmit(props.dataGuest)}> */}
+                    <Button onClick={props.handleSubmit(props.dataGuest)} 
+                        // onMouseOver={()=>{window.location = nextLink}}
+                        label="Submit" style={{ marginTop:15 }} />
+                {/* </Link>                                            */}
+            </div>   
         );
-}
+    }
 
 export default reduxForm({form:'GuestInfoForm', validate })(GuestSubmitForm)

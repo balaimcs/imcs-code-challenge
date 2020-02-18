@@ -1,13 +1,19 @@
 import CONSTANTES from "./CONSTANTES";
 
-    // export const actionEstablecerUsuario = usuario => ({
-    //     type: CONSTANTES._ESTABLECE_USUARIO_SESSION,
-    //     usrInfo:usuario
-    // });
+    export const setUsr = usrInfo => ({
+        type: CONSTANTES._SET_USER,
+        usrInfo
+    });
 
-    // export const actionLogOutUsuario = () => ({
-    //     type: CONSTANTES._LOG_OUT_USUARIO,    
-    // });
+    export const actionLogOutUsuario = () => ({
+        type: CONSTANTES._LOG_OUT_USUARIO,    
+    });
+
+    //Login
+    export const actionAuthUsr = user => ({
+        type: CONSTANTES._USER_AUTH,
+        usrInfo:user
+    });
 
     export const addEventAction = event => ({
         type: CONSTANTES._ADD_NEW_EVENT,
